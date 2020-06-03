@@ -9,6 +9,7 @@
         <nav class="nav nav-masthead justify-content-center">
           <a class="nav-link active" href="{{ route('top') }}">トップ</a>
           <a class="nav-link" href="{{ route('contact') }}">お問い合わせ</a>
+          <a class="nav-link" href="{{ route('login') }}">管理画面</a>
         </nav>
       </div>
     </header>

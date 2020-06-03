@@ -1,0 +1,119 @@
+/* FileForm */
+.custom-file-input:lang(ja) ~ .custom-file-label::after {
+  content: "参照";
+}
+
+.custom-file {
+  overflow: hidden;
+}
+.custom-file-label {
+  white-space: nowrap;
+}
+
+/* 画像アップロード */
+img.img-upload {
+  max-width: 300px;
+}
+
+.table-search {
+  th {
+    vertical-align: middle !important;
+  }
+
+  td {
+    vertical-align: middle !important;
+  }
+}
+
+.table-form {
+  th {
+    width: 20%;
+    vertical-align: middle !important;
+  }
+}
+
+.table-list {
+  tr.bg-gray {
+    background: #EBEDEF;
+  }
+
+  th {
+    vertical-align: middle !important;
+  }
+
+  th.id {
+    width: 75px;
+  }
+
+  th.code {
+    width: 90px;
+  }
+
+  th.date {
+    width: 160px
+  }
+
+  th.datetime {
+    width: 180px
+  }
+
+  th.name {
+    width: 160px;
+  }
+
+  th.kana {
+    width: 160px;
+  }
+
+  th.email {
+    width: 160px;
+  }
+
+  th.tel {
+    width: 160px;
+  }
+
+  th.category {
+    width: 170px;
+  }
+
+  th.shop-name {
+    width: 160px;
+  }
+
+  th.categories {
+    width: 280px;
+  }
+
+  th.sort-no {
+    text-align: center;
+    width: 90px;
+  }
+
+  th.display {
+    width: 120px;
+    text-align: center;
+  }
+
+  th.operation {
+    width: 100px;
+    text-align: center;
+  }
+
+  td {
+    vertical-align: middle !important;
+  }
+
+  td.sort-no {
+    text-align: center;
+  }
+
+  td.display {
+    text-align: center;
+  }
+
+  td.operation {
+    text-align: center;
+  }
+
+}
