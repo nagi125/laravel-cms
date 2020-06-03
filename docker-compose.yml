@@ -43,9 +43,9 @@ services:
       MAIL_USERNAME: 'null'
       MAIL_PASSWORD: 'null'
       MAIL_ENCRYPTION: 'null'
-      # env_file:
-      #- .env
-      #- .env_aws
+    env_file:
+      - .env
+      - .env_aws
     volumes:
       - sync_laravel_cms:/app
     expose:
