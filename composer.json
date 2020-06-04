@@ -11,6 +11,7 @@
         "php": "~7.4.0",
         "ext-mbstring": "*",
         "ext-redis": "*",
+        "barryvdh/laravel-ide-helper": "^2.6",
         "bensampo/laravel-enum": "^1.37",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
@@ -20,7 +21,6 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
-        "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
         "laravel/ui": "^1.0",
