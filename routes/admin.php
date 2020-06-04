@@ -16,5 +16,11 @@ Route::prefix('password')->group(function() {
 
 /** 通常 */
 Route::middleware('auth:admin')->group(function() {
-    Route::get('/', 'Admin\DashboardController@index')->name('admin.dashboard');
+    Route::get('/', 'Admin\DashboardController@index')->name('admin.top');
+    Route::get('/dashboard', 'Admin\DashboardController@dashboard')->name('admin.dashboard');
+
+    // Users
+    Route::resource('users', 'Admin\UserController')->except([
+        'show'
+    ])->names('admin.users');
 });

@@ -165,6 +165,8 @@ return [
         /*
          * Package Service Providers...
          */
+        \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        \BenSampo\Enum\EnumServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +227,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        // 独自定義
+        'Utility' => App\Facades\Utility::class,
+        'UserFacade' => App\Facades\User::class,
+
+        // Enum
+        'EnumUser' => \App\Enums\User::class,
 
     ],
 

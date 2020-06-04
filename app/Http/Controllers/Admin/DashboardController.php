@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     /**
      * トップページ
+     * @return RedirectResponse
+     */
+    public function index(): RedirectResponse
+    {
+        return redirect()->route('admin.dashboard');
+    }
+
+    /**
+     * ダッシュボード
      * @return View
      */
-    public function index(): View
+    public function dashboard(): View
     {
         $title = 'トップページ';
         $description = 'テストディスクリプション';
@@ -24,5 +33,4 @@ class DashboardController extends Controller
 
         return view('admin.dashboard', $data);
     }
-    //
 }
