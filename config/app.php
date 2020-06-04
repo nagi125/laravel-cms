@@ -231,6 +231,7 @@ return [
         // 独自定義
         'Utility' => App\Facades\Utility::class,
         'UserFacade' => App\Facades\User::class,
+        'NewsFacade' => App\Facades\News::class,
 
         // Enum
         'EnumUser' => \App\Enums\User::class,

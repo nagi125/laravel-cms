@@ -13,8 +13,6 @@ try {
     require('bootstrap');
     require('adminator/src/assets/scripts/index');
 
-    require('jquery-ui-dist/jquery-ui');
-    require('jquery-ui-datepicker-with-i18n/ui/i18n/jquery.ui.datepicker-ja');
 } catch (e) {}
 
 /**

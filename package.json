@@ -24,14 +24,13 @@
         "jquery": "^3.5.1",
         "jquery-lazyload": "^1.9.7",
         "jquery-sparkline": "^2.4.0",
-        "jquery-ui-datepicker-with-i18n": "^1.10.4",
-        "jquery-ui-dist": "^1.12.1",
         "lodash": "^4.17.15",
         "popper.js": "^1.16.1",
         "vue": "^2.6.11",
         "vue-carousel": "^0.18.0",
         "vue-feather-icons": "^5.0.0",
         "vue-template-compiler": "^2.6.11",
-        "vuedraggable": "^2.23.2"
+        "vuedraggable": "^2.23.2",
+        "vuejs-datepicker": "^1.6.2"
     }
 }

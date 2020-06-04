@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\NewsService;
 use App\Services\UserService;
 use App\Services\UtilityService;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind('utility', UtilityService::class);
         $this->app->bind('user', UserService::class);
+        $this->app->bind('news', NewsService::class);
     }
 
     /**

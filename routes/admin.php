@@ -23,4 +23,9 @@ Route::middleware('auth:admin')->group(function() {
     Route::resource('users', 'Admin\UserController')->except([
         'show'
     ])->names('admin.users');
+
+    // News
+    Route::resource('news', 'Admin\NewsController')->except([
+        'show'
+    ])->names('admin.news');
 });

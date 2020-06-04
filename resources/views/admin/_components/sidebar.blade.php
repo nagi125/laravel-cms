@@ -35,7 +35,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="sidebar-link" href="">
+        <a class="sidebar-link" href="{{ route('admin.news.index') }}">
                 <span class="icon-holder">
                   <i class="c-light-green-500 ti-pencil"></i>
                 </span>

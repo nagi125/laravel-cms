@@ -19,6 +19,12 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+// Common
+Vue.component('image-form-component', require('./components/common/ImageFileComponent').default);
+Vue.component('date-picker-component', require('./components/common/DatePickerComponent').default);
+Vue.component('is-display-component', require('./components/common/IslDisplayComponent').default);
+Vue.component('is-public-component', require('./components/common/IsPublicComponent').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
