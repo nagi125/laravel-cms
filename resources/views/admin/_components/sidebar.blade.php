@@ -56,15 +56,23 @@
       <li class="nav-item">
         <a class="sidebar-link" href="">
                 <span class="icon-holder">
-                  <i class="c-purple-500 ti-crown"></i>
+                  <i class="c-red-500 ti-home"></i>
                 </span>
-          <span class="title">会社概要</span>
+          <span class="title">店舗管理</span>
         </a>
       </li>
       <li class="nav-item">
         <a class="sidebar-link" href="">
                 <span class="icon-holder">
-                  <i class="c-green-500 ti-user"></i>
+                  <i class="c-brown-500 ti-crown"></i>
+                </span>
+          <span class="title">会社概要</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="sidebar-link" href="{{ route('admin.users.index') }}">
+                <span class="icon-holder">
+                  <i class="c-purple-500 ti-user"></i>
                 </span>
           <span class="title">ユーザー管理</span>
         </a>
