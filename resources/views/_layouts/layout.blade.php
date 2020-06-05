@@ -12,9 +12,20 @@
 </head>
 
 <body class="text-center">
-
-@yield('content')
-
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <h3 class="masthead-brand">CMS</h3>
+      @include('_components.navi')
+    </div>
+  </header>
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading pb-4">{{ $title }}</h1>
+    @yield('content')
+  </main>
+  <footer class="mastfoot mt-auto">
+  </footer>
+</div>
 <script src="{{ asset('/js/app.js') }}"></script>
 </body>
 </html>

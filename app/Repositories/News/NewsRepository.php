@@ -21,6 +21,21 @@ class NewsRepository implements NewsRepositoryInterface
     }
 
     /**
+     * @param  int  $limit
+     * @return Collection
+     */
+    public function getAllForFront(int $limit): Collection
+    {
+        $result = News::query()
+            ->where('is_public', true)
+            ->orderBy('public_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return $result;
+    }
+
+    /**
      * @param $params
      * @param $limit
      * @return LengthAwarePaginator

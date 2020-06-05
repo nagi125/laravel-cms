@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Repositories\News\NewsRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 /**
@@ -18,6 +19,15 @@ class NewsService
     {
         $this->newsRepository = $newsRepository;
         $this->utility = $utility;
+    }
+
+    /**
+     * @param  int  $limit
+     * @return Collection
+     */
+    public function getAllForFront(int $limit): Collection
+    {
+        return $this->newsRepository->getAllForFront($limit);
     }
 
     /**

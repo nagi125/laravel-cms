@@ -234,6 +234,7 @@ return [
         'NewsFacade' => App\Facades\News::class,
 
         // Enum
+        'EnumNavi' => \App\Enums\Navi::class,
         'EnumUser' => \App\Enums\User::class,
 
     ],

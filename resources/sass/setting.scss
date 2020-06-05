@@ -1,0 +1,85 @@
+/*--------------------------------
+ color
+--------------------------------*/
+$red: #e70010;
+$brown: #7a6a55;
+$dark-gray: #333333;
+$orange: #f39800;
+$dark-orange: #ca7e00;
+$dark-pink: #d0155b;
+$gray: #666666;
+$light-gray: #CCCCCC;
+$light-yellow: #fffbc7;
+$white-gray: #fbfcf8;
+$white: #FFFFFF;
+$link-blue: #0066CC;
+$beige: #f7f7e3;
+$light-yellow: #FBF5DB;
+$yellow: #FFDB24;
+
+/*--------------------------------
+ font size
+--------------------------------*/
+//* 8px */
+$font8px: 0.500rem;
+//* 10px */
+$font10px: 0.625rem;
+//* 12px */
+$font12px: 0.750rem;
+//* 14px */
+$font14px: 0.875rem;
+//* 16px */
+$font16px: 1rem;
+//* 18px */
+$font18px: 1.125rem;
+//* 20px */
+$font20px: 1.250rem;
+//* 22px */
+$font22px: 1.375rem;
+//* 24px */
+$font24px: 1.500rem;
+//* 26px */
+$font26px: 1.625rem;
+//* 28px */
+$font28px: 1.750rem;
+//* 30x */
+$font30px: 1.875rem;
+//* 32px */
+$font32px: 2rem;
+//* 34px */
+$font34px: 2.125rem;
+//* 36px */
+$font36px: 2.250rem;
+//* 38px */
+$font38px: 2.375rem;
+//* 40px */
+$font40px: 2.500rem;
+
+/*--------------------------------
+ mixin
+--------------------------------*/
+@mixin fontFam {
+  font-family: "游ゴシック体","Yu Gothic",YuGothic,"ヒラギノ角ゴシック Pro","Hiragino Kaku Gothic Pro",'メイリオ', Meiryo,Osaka,"ＭＳ Ｐゴシック","MS PGothic",sans-serif;
+}
+
+@mixin radius($size:10px) {
+  -webkit-border-radius: ($size);
+  -moz-border-radius: ($size);
+  -ms-border-radius: ($size);
+  -o-border-radius: ($size);
+  border-radius: ($size);
+}
+
+@mixin flex($wrap:nowrap,$jc:space-between) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: $wrap;
+  -webkit-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+  -moz-box-pack: $jc;
+  -ms-flex-pack: $jc;
+  -webkit-justify-content: $jc;
+  justify-content: $jc;
+}

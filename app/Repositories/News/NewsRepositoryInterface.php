@@ -14,5 +14,7 @@ interface NewsRepositoryInterface
 {
     public function getAll(): Collection;
 
+    public function getAllForFront(int $limit): Collection;
+
     public function getSearchResultAtPager(array $params, int $limit): LengthAwarePaginator;
 }

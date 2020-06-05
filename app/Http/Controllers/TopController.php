@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\NewsService;
+use App\Services\UtilityService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,6 +13,20 @@ use Illuminate\View\View;
  */
 class TopController extends Controller
 {
+    protected UtilityService $utility;
+    protected NewsService $newsService;
+
+    /**
+     * TopController constructor.
+     * @param  UtilityService  $utility
+     * @param  NewsService  $newsService
+     */
+    public function __construct(UtilityService $utility, NewsService $newsService)
+    {
+        $this->utility = $utility;
+        $this->newsService = $newsService;
+    }
+
     /**
      * トップページ
      * @return View
@@ -20,7 +36,10 @@ class TopController extends Controller
         $title = 'トップページ';
         $description = 'テストディスクリプション';
 
+        $news = $this->newsService->getAllForFront(5);
+
         $data = [
+            'news'  => $news,
             'title' => $title,
             'description' => $description,
         ];
