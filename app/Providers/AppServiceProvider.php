@@ -7,6 +7,7 @@ use App\Services\UserService;
 use App\Services\UtilityService;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url): void
     {
+        Paginator::useBootstrap();
+
         if (env('APP_SCHEME') === 'https') {
             $url->forceScheme('https');
             $this->app['request']->server->set('HTTPS', 'on');
