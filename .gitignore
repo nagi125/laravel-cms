@@ -27,8 +27,8 @@ resources/assets/build
 
 # docker data
 .docker-sync
-docker/db/data/*
-docker/redis/data/*
+.docker/db/data/*
+.docker/redis/data/*
 
 # env
 .env

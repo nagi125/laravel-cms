@@ -2,7 +2,7 @@ version: '3'
 services:
   nginx:
     container_name: nginx
-    build: ./docker/nginx
+    build: .docker/nginx
     ports:
       - 80:80
     volumes:
@@ -63,8 +63,8 @@ services:
       POSTGRES_PASSWORD: 'docker'
       POSTGRES_DB: 'laravel_development'
     volumes:
-      -  database:/var/lib/postgresql/data
-      - ./docker/db/sql:/docker-entrypoint-initdb.d
+      - ./.docker/db/data:/var/lib/postgresql/data
+      - ./.docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
 
@@ -74,8 +74,8 @@ services:
     environment:
       TZ: 'Asia/Tokyo'
     volumes:
-      - redis:/data
-      - ./docker/redis/conf:/user/local/etc/redis
+      - ./.docker/redis/data:/data
+      - ./.docker/redis/conf:/user/local/etc/redis
     ports:
       - 6379:6379
 
@@ -90,7 +90,3 @@ services:
 volumes:
   sync_laravel_cms:
     external: true
-  database:
-  redis:
-
-

@@ -26,8 +26,8 @@ RUN docker-php-source extract && \
     docker-php-ext-install redis
 
 # php.conf php-fpm.conf
-COPY docker/app/conf/php/php.ini /usr/local/etc/php/php.ini
-COPY docker/app/conf/php/docker.conf /usr/local/etc/php-fpm.d/docker.conf
+COPY .docker/app/conf/php/php.ini /usr/local/etc/php/php.ini
+COPY .docker/app/conf/php/docker.conf /usr/local/etc/php-fpm.d/docker.conf
 
 # install Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
