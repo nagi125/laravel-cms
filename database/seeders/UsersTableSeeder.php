@@ -1,8 +1,10 @@
 <?php
+namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -25,6 +27,8 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
         ]);
+
+        User::factory(5)->create();
 
         DB::select("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");
     }
