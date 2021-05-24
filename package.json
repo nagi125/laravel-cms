@@ -14,23 +14,23 @@
         "cross-env": "^5.2.1",
         "laravel-mix": "^4.1.4",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.26.3",
+        "sass": "^1.34.0",
         "sass-loader": "^7.3.1"
     },
     "dependencies": {
         "adminator": "^1.0.0",
         "axios": "^0.19.2",
-        "bootstrap": "^4.4.1",
-        "jquery": "^3.5.1",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6.0",
         "jquery-lazyload": "^1.9.7",
         "jquery-sparkline": "^2.4.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "popper.js": "^1.16.1",
-        "vue": "^2.6.11",
+        "vue": "^2.6.12",
         "vue-carousel": "^0.18.0",
-        "vue-feather-icons": "^5.0.0",
-        "vue-template-compiler": "^2.6.11",
-        "vuedraggable": "^2.23.2",
+        "vue-feather-icons": "^5.1.0",
+        "vue-template-compiler": "^2.6.12",
+        "vuedraggable": "^2.24.3",
         "vuejs-datepicker": "^1.6.2"
     }
 }
