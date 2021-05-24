@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TopController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'TopController@index')->name('top');
-Route::get('/contact', 'ContactController@index')->name('contact');
+Route::get('/', [TopController::class, 'index'])->name('top');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
