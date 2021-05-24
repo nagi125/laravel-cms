@@ -14,6 +14,7 @@
         "barryvdh/laravel-ide-helper": "^2.6",
         "bensampo/laravel-enum": "^1.37",
         "fideloper/proxy": "^4.0",
+        "fruitcake/laravel-cors": "^2.0",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.1",
