@@ -14,7 +14,7 @@ services:
   app:
     container_name: app
     build:
-      context: .
+      context: .docker/app
       dockerfile: Dockerfile
     environment:
       LANG: 'ja_JP.UTF-8'
@@ -54,7 +54,7 @@ services:
       - db
 
   db:
-    image: postgres:12
+    image: postgres:12-alpine
     container_name: db
     environment:
       TZ: 'Asia/Tokyo'
@@ -68,7 +68,7 @@ services:
       - 5432:5432
 
   redis:
-    image: redis:5.0
+    image: redis:5.0-alpine
     container_name: redis
     environment:
       TZ: 'Asia/Tokyo'
