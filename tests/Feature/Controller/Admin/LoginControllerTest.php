@@ -21,12 +21,14 @@ class LoginControllerTest extends TestCase
      */
     public function Login処理は正常である()
     {
+        $user = User::factory()->create();
+
         $params = [
             'email'    => 'admin@example.com',
             'password' => 'admin1234'
         ];
 
-        $res = $this->post('/admin/login', $params);
+        $res = $this->actingAs($user, 'admin')->post('/admin/login', $params);
 
         $res->assertRedirect(route('admin.dashboard'));
     }
