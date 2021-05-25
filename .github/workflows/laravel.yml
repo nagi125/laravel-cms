@@ -31,7 +31,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: '7.4'
+        php-version: '8.0'
         extensions: mbstring, pdo, pdo_pgsql, gd, json
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"

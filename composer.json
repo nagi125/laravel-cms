@@ -8,9 +8,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "~7.4.0",
+        "php": "~8.0.0",
         "ext-mbstring": "*",
-        "ext-redis": "*",
         "barryvdh/laravel-ide-helper": "^2.6",
         "bensampo/laravel-enum": "^3.0",
         "fideloper/proxy": "^4.0",
