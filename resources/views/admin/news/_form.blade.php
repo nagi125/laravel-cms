@@ -4,7 +4,7 @@
   <tr>
     <th class="bg-dark text-white border-white"><span class="p-5 mr-2 badge badge-danger">必須</span>公開日</th>
     <td>
-      @includeWhen($errors->get('public-date'), 'admin._components.validation_error', ['errors' => $errors->get('public-date')])
+      @includeWhen($errors->get('public_date'), 'admin._components.validation_error', ['errors' => $errors->get('public-date')])
       <date-picker-component :target="'public_date'" :value="{{ json_encode(old('public_date', $news->public_date ? $news->public_date->format('Y-m-d') : '')) }}"></date-picker-component>
     </td>
   </tr>
