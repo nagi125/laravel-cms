@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - sync_laravel_cms:/app
+      - .:/app
     tty: true
     depends_on:
       - app
@@ -46,7 +46,7 @@ services:
     env_file:
       - .env
     volumes:
-      - sync_laravel_cms:/app
+      - .:/app
     expose:
       - 9000
     tty: true
@@ -62,7 +62,7 @@ services:
       POSTGRES_PASSWORD: 'docker'
       POSTGRES_DB: 'laravel_development'
     volumes:
-      - ./.docker/db/data:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
       - ./.docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 5432:5432
@@ -73,7 +73,7 @@ services:
     environment:
       TZ: 'Asia/Tokyo'
     volumes:
-      - ./.docker/redis/data:/data
+      - redis:/data
       - ./.docker/redis/conf:/user/local/etc/redis
     ports:
       - 6379:6379
@@ -87,5 +87,5 @@ services:
       - 1025
 
 volumes:
-  sync_laravel_cms:
-    external: true
+  database:
+  redis:

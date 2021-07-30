@@ -1,6 +1,0 @@
-version: '2'
-syncs:
-  sync_laravel_cms:
-    src: '.'
-    sync_excludes: ['.idea', '.git']
-    watch_excludes: ['.idea', '.git']
