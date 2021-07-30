@@ -3,6 +3,7 @@
 namespace Tests\Feature\Controller\Admin;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ForgotPasswordControllerTest extends TestCase
@@ -17,7 +18,7 @@ class ForgotPasswordControllerTest extends TestCase
     }
 
     /**
-     * Todo: Actions環境下のみ500エラー吐くので要調査
+     * @test
      */
     public function パスワード再発行用メール送信処理は正常である()
     {
@@ -25,8 +26,11 @@ class ForgotPasswordControllerTest extends TestCase
             'email' => 'admin@example.com'
         ];
 
-        $res = $this->post(route('password.email'), $params);
-        $res->assertStatus(302);
+        Mail::fake();
+        $res = $this->from(route('password.request'))
+            ->post(route('password.email'), $params);
+
+        $res->assertRedirect(route('password.request'));
     }
 
 }
