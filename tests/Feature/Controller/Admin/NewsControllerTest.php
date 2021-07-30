@@ -5,6 +5,7 @@ namespace Tests\Feature\Controller\Admin;
 use App\Models\News;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class NewsControllerTest extends TestCase
@@ -89,7 +90,7 @@ class NewsControllerTest extends TestCase
     }
 
     /**
-     * Todo: delete処理がS3に依存しているため解決方法要調査
+     * @test
      */
     public function お知らせ管理の削除処理は正常である()
     {
@@ -97,6 +98,7 @@ class NewsControllerTest extends TestCase
 
         $deletePost = News::query()->inRandomOrder()->first();
 
+        Storage::fake();
         $res = $this->actingAs($user, 'admin')
             ->delete(route('admin.news.destroy', ['news' => $deletePost->id]));
 
