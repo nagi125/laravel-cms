@@ -105,7 +105,6 @@ class UserControllerTest extends TestCase
         $deleteUser = User::query()->inRandomOrder()->first();
 
         $res = $this->actingAs($user, 'admin')
-            ->from(route('admin.users.index'))
             ->delete(route('admin.users.destroy', ['user' => $deleteUser->id]));
 
         $res->assertRedirect(route('admin.users.index'));

@@ -100,6 +100,7 @@ class NewsControllerTest extends TestCase
 
         Storage::fake();
         $res = $this->actingAs($user, 'admin')
+            ->from(route('admin.news.index'))
             ->delete(route('admin.news.destroy', ['news' => $deletePost->id]));
 
         $res->assertRedirect(route('admin.news.index'));
