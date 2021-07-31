@@ -17,7 +17,7 @@ final class Navi extends Enum
         ],
 
         'contact' => [
-            'route' => 'contact',
+            'route' => 'contact.index',
             'name'  => 'お問い合わせ',
         ],
 
