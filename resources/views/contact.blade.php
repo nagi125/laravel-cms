@@ -3,7 +3,7 @@
 @section('description', $description ?? '')
 @section('content')
   <div>
-    @includeWhen($errors->any(), '_components.errors', ['errors' => $errors])
+    @includeWhen($errors->any(), '_partials.errors', ['errors' => $errors])
     {{ Form::open(['route' => ['contact.submit'], 'method' => 'post']) }}
     @csrf
     @method('post')

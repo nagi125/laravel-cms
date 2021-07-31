@@ -16,7 +16,7 @@
   <header class="masthead mb-auto">
     <div class="inner">
       <h3 class="masthead-brand">CMS</h3>
-      @include('_components.navi')
+      @include('_partials.navi')
     </div>
   </header>
   <main role="main" class="inner cover">
