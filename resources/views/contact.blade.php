@@ -10,7 +10,7 @@
     <div class="form-group row">
       <label for="name" class="text-left col-sm-3 col-form-label"><span class="badge-danger p-2 mr-1">必須</span>お名前</label>
       <div class="col-sm-9">
-        <input type="text" id="name" name="name", class="form-control" placeholder="苗字 名前">
+        <input type="text" id="name" name="name" class="form-control" placeholder="苗字 名前">
       </div>
     </div>
     <div class="form-group row">
