@@ -18,7 +18,7 @@ class ContactPostRequest extends FormRequest
     public function authorize()
     {
         $paths = [
-            'news.submit',
+            'contact.submit',
         ];
 
         return (in_array($this->route()->action['as'], $paths));
