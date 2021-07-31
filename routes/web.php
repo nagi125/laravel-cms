@@ -15,3 +15,4 @@ use App\Http\Controllers\ContactController;
 */
 Route::get('/', [TopController::class, 'index'])->name('top');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::get('/contact/thanks', [ContactController::class, 'thanks'])->name('thanks');

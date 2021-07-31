@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Class ContactController
@@ -12,6 +13,7 @@ class ContactController extends Controller
 {
     /**
      * お問い合わせ
+     * @Method GET
      * @return View
      */
     public function index(): View
@@ -25,5 +27,23 @@ class ContactController extends Controller
         ];
 
         return view('contact', $data);
+    }
+
+    /**
+     * サンキューページ
+     * @Method GET
+     * @return View
+     */
+    public function thanks(): View
+    {
+        $title = 'サンキューページ';
+        $description = '';
+
+        $data = [
+            'title' => $title,
+            'description' => $description,
+        ];
+
+        return view('thanks', $data);
     }
 }
