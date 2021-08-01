@@ -1,0 +1,90 @@
+on:
+  push:
+    branches: [ ecs ]
+
+name: Deploy to Amazon ECS
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY_APP: laravel-cms-app
+          ECR_REPOSITORY_NGINX: laravel-cms-nginx
+          IMAGE_TAG: latest
+        run: |
+          # Build a docker container and push it to ECR so that it can be deployed to ECS.
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG -f .docker/nginx/prod.Dockerfile ./
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY_NGINX:$IMAGE_TAG"
+
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY_APP:$IMAGE_TAG -f .docker/app/prod.Dockerfile ./
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY_APP:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY_APP:$IMAGE_TAG"
+
+      # Rewrite task-definition
+      - name: rewrite task-definition
+        run: sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g .aws/ecs/migration-task-definition.json &&
+          sed -i -e s/SED_TARGET_AWS_ACCOUNT_ID/${{ secrets.AWS_ACCOUNT_ID }}/g .aws/ecs/task-definition.json &&
+          sed -i -e s/SED_TARGET_LOKI_ID/${{ secrets.LOKI_ID }}/g .aws/ecs/task-definition.json &&
+          sed -i -e s/SED_TARGET_LOKI_SECRET/${{ secrets.LOKI_SECRET }}/g .aws/ecs/task-definition.json
+
+      # Migration
+      - name: migration task def
+        id: migration-task-def
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: .aws/ecs/migration-task-definition.json
+          cluster: laravel-cms
+
+      - name: migrate
+        run: aws ecs run-task
+          --launch-type FARGATE
+          --network-configuration "awsvpcConfiguration={subnets=[${{ secrets.SUBNETS }}], securityGroups=[${{ secrets.SECURITY_GROUPS }}], assignPublicIp=ENABLED}"
+          --cluster laravel-cms
+          --task-definition ${{ steps.migration-task-def.outputs.task-definition-arn }}
+
+      # Deploy
+      - name: Render Amazon ECS task definition for first container
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .aws/ecs/task-definition.json
+          container-name: nginx
+          image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/laravel-cms-nginx:latest
+
+      - name: Modify Amazon ECS task definition with second container
+        id: render-app-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+          container-name: app
+          image: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-1.amazonaws.com/laravel-cms-app:latest
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-app-container.outputs.task-definition }}
+          service: laravel-cms
+          cluster: laravel-cms
+          wait-for-service-stability: true
