@@ -7,4 +7,5 @@
 .styleci.yml
 doc
 vendor
+node_modules
 docker-compose.yml
