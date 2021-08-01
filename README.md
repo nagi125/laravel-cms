@@ -9,11 +9,13 @@
 - Nginx:1.20.x
 - MailCatcher
 
-## 構成図
-![structure](./.doc/images/structure.png)
+## 開発環境構成図
+![structure](./.doc/images/structure_dev.png)
+
+## 本番環境構成図
+![structure](./.doc/images/structure_prod.png)
 
 ## 開発環境の準備
-
 ### 初期セットアップ
 ※ APP_KEYの値が変更されるので実行は初回だけにしてください
 ```
