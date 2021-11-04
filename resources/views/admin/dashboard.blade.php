@@ -1,6 +1,6 @@
-@extends('admin._layouts.layout')
-@section('title', $title ?? '')
-@section('description', $description ?? '')
+@extends('admin._layouts.app')
+@section('title', $title)
+
 @section('content')
   <h4 class="c-grey-900 mT-10 mB-30">{{ $title }}</h4>
   <div class="row gap-20 masonry pos-r">
