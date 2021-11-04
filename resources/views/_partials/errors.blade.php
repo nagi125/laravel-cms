@@ -1,5 +1,5 @@
 <div class="alert alert-danger text-left">
   @foreach ($errors->all() as $error)
-    <p>・{{ $error }}</p>
+    <p class="text-start">・{{ $error }}</p>
   @endforeach
 </div>
