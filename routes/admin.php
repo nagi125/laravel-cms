@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\NewsController;
 /** Auth関連 */
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Password
 Route::prefix('password')->group(function() {
