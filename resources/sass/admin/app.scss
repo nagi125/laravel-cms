@@ -1,5 +1,12 @@
-// Adminator
-@import '~adminator/src/assets/styles/index';
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// 独自定義
-@import 'admin';
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+// vue-select
+@import "~vue-select/src/scss/vue-select.scss";
