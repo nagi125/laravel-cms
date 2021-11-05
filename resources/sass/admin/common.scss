@@ -63,6 +63,36 @@
   padding: 30px 0 10px 0;
 }
 
+.table-search-result {
+  th {
+    vertical-align: middle;
+  }
+
+  th.id {
+    width: 100px;
+  }
+
+  th.category {
+    width: 200px;
+  }
+
+  th.shop {
+    width: 200px;
+  }
+
+  th.operation {
+    width: 120px;
+    text-align: center;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  td.operation {
+    text-align: center;
+  }
+}
 
 .table-form {
   th {
