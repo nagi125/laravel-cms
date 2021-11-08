@@ -38,7 +38,7 @@ class LoginControllerTest extends TestCase
      */
     public function Logout処理は正常である()
     {
-        $res = $this->post('/admin/logout');
+        $res = $this->get('/admin/logout');
 
         $res->assertRedirect(route('login'));
     }
