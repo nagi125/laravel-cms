@@ -1,8 +1,7 @@
 @extends('admin._layouts.app')
 @section('title', $title)
 @section('content')
-  <h4 class="c-grey-900 mT-10 mB-30">{{ $title }}</h4>
-  {{ Form::open(['route' => ['admin.users.store'], 'method' => 'post']) }}
+  {{ Form::open(['route' => ['admin.users.store'], 'method' => 'post', 'novalidate' => 'novalidate']) }}
   @csrf
   @method('post')
   @include('admin.users._form')
