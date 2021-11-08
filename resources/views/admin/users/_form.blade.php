@@ -26,15 +26,18 @@
     </div>
 
     <div class="mb-3">
-
-      <span class="p-2 me-1 badge bg-danger">必須</span>
+      @if($isCreate)
+        <span class="p-2 me-1 badge bg-danger">必須</span>
+      @endif
       {{ Form::label('password', "パスワード(半角英数字8文字以上)", ['class' => 'form-label']) }}
       @includeWhen($errors->get('password'), 'admin._partials.validation_error', ['errors' => $errors->get('password')])
       {{ Form::password('password', ['id' => 'password', 'class' => 'form-control bg-white']) }}
     </div>
 
     <div class="mb-3">
-      <span class="p-2 me-1 badge bg-danger">必須</span>
+      @if($isCreate)
+        <span class="p-2 me-1 badge bg-danger">必須</span>
+      @endif
       {{ Form::label('password_confirmation', 'パスワード(確認用)', ['class' => 'form-label']) }}
       @includeWhen($errors->get('password_confirmation'), 'admin._partials.validation_error', ['errors' => $errors->get('password_confirmation')])
       {{ Form::password('password_confirmation', ['id' => 'password_confirmation', 'class' => 'form-control bg-white']) }}

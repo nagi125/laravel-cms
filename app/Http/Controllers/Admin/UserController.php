@@ -66,10 +66,12 @@ class UserController extends Controller
     public function create(User $user): View
     {
         $title = '新規ユーザー作成';
+        $isCreate = true;
 
         $data = [
-            'user'  => $user,
-            'title' => $title,
+            'user'     => $user,
+            'isCreate' => $isCreate,
+            'title'    => $title,
         ];
 
         return view('admin.users.create', $data);
@@ -84,10 +86,12 @@ class UserController extends Controller
     public function edit(User $user): View
     {
         $title = 'ユーザーの編集: '. $user->name;
+        $isCreate = false;
 
         $data = [
-            'user'  => $user,
-            'title' => $title,
+            'user'     => $user,
+            'isCreate' => $isCreate,
+            'title'    => $title,
         ];
 
         return view('admin.users.edit', $data);
