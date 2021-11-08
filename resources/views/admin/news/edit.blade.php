@@ -1,7 +1,7 @@
 @extends('admin._layouts.app')
 @section('title', $title)
 @section('content')
-  {{ Form::open(['route' => ['admin.news.update', 'news' => $news->id], 'method' => 'put', 'files' => true]) }}
+  {{ Form::open(['route' => ['admin.news.update', 'news' => $news->id], 'method' => 'put', 'files' => true, 'novalidate' => 'novalidate']) }}
     @csrf
     @method('PUT')
   @include('admin.news._form')
