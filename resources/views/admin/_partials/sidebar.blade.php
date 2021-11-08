@@ -16,4 +16,13 @@
       </a>
     </li>
   </ul>
+
+  <p class="fw-bold px-3 mt-3 mb-0">ユーザー管理</p>
+  <ul class="nav flex-column mb-2">
+    <li class="nav-item ps-2">
+      <a class="nav-link" href="{{ route('admin.users.index') }}">
+        <i class="bi bi-caret-right me-1"></i>ユーザー管理
+      </a>
+    </li>
+  </ul>
 </nav>
