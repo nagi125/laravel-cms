@@ -2,26 +2,23 @@
 @section('title', $title)
 @section('content')
   @includeWhen(session('flash_message'), 'admin._partials.flash_message_success')
+
   {{ Form::open(['route' => ['admin.news.index'], 'class' => 'pb-3 border-bottom', 'method' => 'GET']) }}
-  <table class="table table-striped table-bordered align-middle">
-    <colgroup>
-      <col style="width: 12%;">
-      <col style="width: 33%;">
-      <col style="width: 12%;">
-      <col style="width: 33%;">
-    </colgroup>
-    <tr>
-      <th scope="row" class="table-dark">タイトル</th>
-      <td colspan="3">
-        {{ Form::text('keyword', $params['keyword'] ?? '', ['class' => 'form-control']) }}
-      </td>
-    </tr>
-  </table>
-  <div class="text-center">
-    {{ Form::submit('検索', ['class' => 'btn btn-primary px-5']) }}
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      検索条件
+    </div>
+    <div class="card-body bg-light">
+      <div class="mb-3">
+        {{ Form::label('keyword', 'タイトル', ['class' => 'form-label']) }}
+        {{ Form::text('keyword', $params['keyword'] ?? '', ['class' => 'form-control bg-white']) }}
+      </div>
+      <div class="text-center">
+        {{ Form::submit('検索', ['class' => 'btn btn-primary px-5']) }}
+      </div>
+    </div>
   </div>
   {{ Form::close() }}
-
 
   <div id='search_result' class="operation mt-3 py-3">
     <a class="btn btn-outline-primary" href="{{ route('admin.news.create') }}">新規作成</a>
