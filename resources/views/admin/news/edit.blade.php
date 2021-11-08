@@ -7,7 +7,7 @@
   @include('admin.news._form')
   {{ Form::close() }}
   <div class="my-3 pt-3 border-top">
-    <input type="button" class="btn btn-outline-secondary" onClick="location.href='{{ route('admin.news.index') }}'" value="一覧に戻る"/>
+    <a class="btn btn-outline-secondary" href="{{ route('admin.news.index') }}">一覧に戻る</a>
     <form name="delete" method="POST" action="{{ route('admin.news.destroy', ['news' => $news]) }}" class="d-inline">
       @csrf
       @method('DELETE')
