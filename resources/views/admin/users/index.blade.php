@@ -1,34 +1,29 @@
-@extends('admin._layouts.layout')
+@extends('admin._layouts.app')
 @section('title', $title)
 @section('content')
   @includeWhen(session('flash_message'), 'admin._components.flash_message_success')
-  <h4 class="c-grey-900 mT-10 mB-30">{{ $title }}</h4>
   {{ Form::open(['route' => ['admin.users.index'], 'class' => 'pb-3 border-bottom', 'method' => 'GET']) }}
-  <table class="table table-striped table-bordered table-search">
-    <colgroup>
-      <col style="width: 12%;">
-      <col style="width: 33%;">
-      <col style="width: 12%;">
-      <col style="width: 33%;">
-    </colgroup>
-    <tr>
-      <th scope="row" class="bg-dark text-white">名前</th>
-      <td colspan="3">
-        {{ Form::text('keyword', isset($params['keyword']) ? $params['keyword'] : '', ['class' => 'form-control']) }}
-      </td>
-    </tr>
-  </table>
-  <div class="text-center">
-    {{ Form::submit('検索', ['class' => 'btn btn-primary pl-5 pr-5']) }}
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      検索条件
+    </div>
+    <div class="card-body bg-light">
+      <div class="mb-3">
+        {{ Form::label('keyword', '名前', ['class' => 'form-label']) }}
+        {{ Form::text('keyword', $params['keyword'] ?? '', ['class' => 'form-control bg-white']) }}
+      </div>
+      <div class="text-center">
+        {{ Form::submit('検索', ['class' => 'btn btn-primary px-5']) }}
+      </div>
+    </div>
   </div>
   {{ Form::close() }}
-
 
   <div id='search_result' class="operation mt-3 py-3">
     <a class="btn btn-outline-primary" href="{{ route('admin.users.create') }}">新規作成</a>
   </div>
-  <table class="table table-striped table-bordered item-va-middle table-list">
-    <thead class="thead-dark">
+  <table class="table table-striped table-bordered table-search-result">
+    <thead class="bg-dark text-white">
     <tr>
       <th scope="col" class="id">ID</th>
       <th scope="col" class="name">名前</th>
