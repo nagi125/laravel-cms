@@ -1,16 +1,15 @@
 <template>
   <div>
-    <div class="input-group">
-      <div class="custom-file">
-        <input type="file" :id=id :name=name accept="image/*" class="custom-file-input form-control-file" lang="ja" v-on:change="handleChange" />
-        <label class="custom-file-label" :for=id>{{ label }}</label>
+    <div class="row">
+      <div class="col-11">
+        <input type="file" :id=id :name=name accept="image/*" class="form-control bg-white" lang="ja" @change="handleChange" />
       </div>
-      <div class="input-group-append">
-        <button type="button" class="btn btn-outline-secondary reset" style="font-size: 12px;" v-on:click="remove">取消</button>
+      <div class="col-1 text-start">
+        <button class="btn btn-outline-danger" @click.prevent="remove">削除</button>
       </div>
     </div>
     <div v-if="preview">
-      <img id=img-upload class="img-thumbnail mt-1 img-upload" v-bind:src="preview"/>
+      <img id=img-upload class="img-thumbnail mt-1 img-upload" :src="preview" :alt=name />
     </div>
   </div>
 </template>
@@ -22,19 +21,18 @@
       imagePath: String,
     },
 
-    data: function() {
+    data() {
       return {
         preview: '',
-        label: 'ファイル選択...',
       }
     },
 
-    created: function() {
+    created() {
       this.preview = this.imagePath;
     },
 
     methods: {
-      handleChange: function(e) {
+      handleChange(e) {
         let files = e.target.files || e.dataTransfer.files;
 
         // 名前の取得
@@ -49,11 +47,11 @@
       },
 
       remove() {
-        let file = document.getElementById(this.id);
-        file.value = '';
+        const file = document.getElementById(this.id);
 
+        file.value = '';
         this.label = 'ファイル選択...';
-        this.preview = false;
+        this.preview = '';
       },
     },
   }

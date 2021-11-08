@@ -1,30 +1,32 @@
 @includeWhen(session('critical_error_message'), 'admin._partials.flash_message_error')
-<table class="table table-striped border item-va-middle table-form">
-  <tbody>
-  <tr>
-    <th class="bg-dark text-white border-white"><span class="p-5 mr-2 badge badge-danger">必須</span>公開日</th>
-    <td>
-      @includeWhen($errors->get('public_date'), 'admin._partials.validation_error', ['errors' => $errors->get('public-date')])
+
+<div class="card">
+  <div class="card-header bg-dark text-white">
+    登録内容
+  </div>
+  <div class="card-body bg-light">
+    <div class="mb-3">
+      <span class="p-2 me-1 badge bg-danger">必須</span>
+      {{ Form::label('public_date', '公開日', ['class' => 'form-label']) }}
+      @includeWhen($errors->get('public_date'), 'admin._partials.validation_error', ['errors' => $errors->get('public_date')])
       <date-picker-component :target="'public_date'" :value="{{ json_encode(old('public_date', $news->public_date ? $news->public_date->format('Y-m-d') : '')) }}"></date-picker-component>
-    </td>
-  </tr>
-  <tr>
-    <th class="bg-dark text-white border-white"><span class="p-5 mr-2 badge badge-danger">必須</span>タイトル</th>
-    <td>
+    </div>
+
+    <div class="mb-3">
+      <span class="p-2 me-1 badge bg-danger">必須</span>
+      {{ Form::label('title', 'タイトル', ['class' => 'form-label']) }}
       @includeWhen($errors->get('title'), 'admin._partials.validation_error', ['errors' => $errors->get('title')])
-      {{ Form::text('title', old('title', $news->title ?? ''), ['class' => 'form-control', 'required' => 'required']) }}
-    </td>
-  </tr>
-  <tr>
-    <th class="bg-dark text-white border-white">記事内容</th>
-    <td>
+      {{ Form::text('title', old('title', $news->title ?? ''), ['class' => 'form-control bg-white', 'required' => 'required']) }}
+    </div>
+
+    <div class="mb-3">
+      {{ Form::label('body', '記事内容', ['class' => 'form-label']) }}
       @includeWhen($errors->get('body'), 'admin._partials.validation_error', ['errors' => $errors->get('body')])
-      {!! Form::textarea('body', old('body', $news->body ?? ''), ['class' => 'form-control', 'rows' => '30']) !!}
-    </td>
-  </tr>
-  <tr>
-    <th scope="row" class="bg-dark text-white border-white">写真</th>
-    <td>
+      {!! Form::textarea('body', old('body', $news->body ?? ''), ['class' => 'form-control bg-white', 'rows' => '20']) !!}
+    </div>
+
+    <div class="mb-3">
+      {{ Form::label('image', '写真', ['class' => 'form-label']) }}
       @includeWhen($errors->get('image'), 'admin._partials.validation_error', ['errors' => $errors->get('image')])
       <image-form-component :id="'image'" :name="'image'" image-path="{{ $imageUrl ?? ''}}" ></image-form-component>
       @if($news->image)
@@ -33,17 +35,16 @@
           {{ Form::Label('is_delete', '削除', ['class' => 'form-check-label']) }}
         </div>
       @endif
-    </td>
-  </tr>
-  <tr>
-    <th class="bg-dark text-white border-white">Description</th>
-    <td>
+    </div>
+
+    <div class="mb-3">
+      {{ Form::label('title', 'Description', ['class' => 'form-label']) }}
       @includeWhen($errors->get('description'), 'admin._partials.validation_error', ['errors' => $errors->get('description')])
-      {{ Form::text('description', old('description', $news->description ?? ''), ['class' => 'form-control']) }}
-    </td>
-  </tr>
-  </tbody>
-</table>
-<div class="text-center">
-  {{ Form::submit('保存', ['class' => 'btn btn-primary px-5']) }}
+      {{ Form::text('description', old('description', $news->description ?? ''), ['class' => 'form-control bg-white', 'required' => 'required']) }}
+    </div>
+
+    <div class="text-center">
+      {{ Form::submit('保存', ['class' => 'btn btn-primary px-5']) }}
+    </div>
+  </div>
 </div>
