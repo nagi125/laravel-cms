@@ -2,6 +2,8 @@ FROM php:8.1-fpm-alpine
 
 ENV TZ Asia/Tokyo
 ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_PROCESS_TIMEOUT 0
+ENV COMPOSER_NO_INTERACTION 1
 
 RUN set -eux && \
     apk add --update-cache --no-cache openssl git autoconf g++ nodejs npm yarn oniguruma-dev postgresql-dev libtool make libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev libwebp-dev libxpm-dev && \
