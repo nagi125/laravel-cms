@@ -32,7 +32,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
-        extensions: mbstring, pdo, pdo_pgsql, gd, json
+        extensions: mbstring, pdo, pdo_pgsql, gd
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.github', '.env');"
     - name: Install Dependencies
