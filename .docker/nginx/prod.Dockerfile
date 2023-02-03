@@ -1,4 +1,4 @@
-FROM nginx:1.18-alpine
+FROM nginx:1.22
 
 ENV TZ Asia/Tokyo
 
