@@ -18,6 +18,10 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
 RUN docker-php-ext-install mbstring pdo pdo_pgsql && \
     docker-php-ext-enable mbstring
 
+# add opcache
+RUN docker-php-ext-configure opcache --enable-opcache && \
+    docker-php-ext-install opcache
+
 # add gd
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp && \
     docker-php-ext-install -j$(nproc) gd
@@ -31,6 +35,8 @@ RUN pecl install xdebug && \
     docker-php-ext-enable xdebug
 
 COPY conf/php.ini /usr/local/etc/php/php.ini
+COPY conf/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY conf/docker.conf /usr/local/etc/php-fpm.d/docker.conf
 
 # install Composer
