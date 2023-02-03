@@ -22,6 +22,10 @@ RUN docker-php-ext-install mbstring pdo pdo_pgsql && \
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp && \
     docker-php-ext-install -j$(nproc) gd
 
+# add redis
+RUN pecl install redis && \
+    docker-php-ext-enable redis
+
 # add xdebug
 RUN pecl install xdebug && \
     docker-php-ext-enable xdebug
