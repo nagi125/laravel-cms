@@ -2,11 +2,11 @@
 制作依頼があった時のテンプレートとして使用する
  
 ## ミドルウェアのバージョン
-- PHP:8.0.x
-- Laravel:8.x
-- PostgreSQL:12.x
-- Redis:6.0.x
-- Nginx:1.20.x
+- PHP:8.1.x
+- Laravel:9.x
+- PostgreSQL:15.x
+- Redis:7.0.x
+- Nginx:1.22.x
 - MailCatcher
 
 ## 開発環境構成図
