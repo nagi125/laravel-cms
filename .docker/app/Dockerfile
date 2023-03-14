@@ -14,7 +14,7 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     rm -rf /var/cache/apt && \
     npm install npm@latest -g
 
-# add extention
+# add extension
 RUN docker-php-ext-install mbstring pdo pdo_pgsql && \
     docker-php-ext-enable mbstring
 
@@ -30,8 +30,8 @@ RUN pecl install redis && \
 RUN pecl install xdebug && \
     docker-php-ext-enable xdebug
 
-COPY conf/php.ini /usr/local/etc/php/php.ini
-COPY conf/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+COPY conf/php.ini /usr/local/etc/php/conf.d/php.ini
 COPY conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY conf/docker.conf /usr/local/etc/php-fpm.d/docker.conf
 
