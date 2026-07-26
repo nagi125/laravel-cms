@@ -149,6 +149,14 @@ class AdminPostTest extends TestCase
         $this->deleteJson('/api/admin/posts/'.$post->id)->assertUnauthorized();
     }
 
+    public function test_guests_cannot_view_admin_posts(): void
+    {
+        $post = Post::factory()->create();
+
+        $this->getJson('/api/admin/posts')->assertUnauthorized();
+        $this->getJson('/api/admin/posts/'.$post->id)->assertUnauthorized();
+    }
+
     public function test_post_validation_failure_returns_unprocessable_response(): void
     {
         $user = User::factory()->create();

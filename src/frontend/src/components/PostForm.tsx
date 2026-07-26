@@ -13,6 +13,7 @@ const EMPTY_POST: PostInput = {
   status: "draft",
   published_at: null,
 };
+const MILLISECONDS_PER_MINUTE = 60_000;
 
 type PostFormProps = {
   initialPost?: Post;
@@ -20,20 +21,41 @@ type PostFormProps = {
   onSubmit: (input: PostInput) => Promise<void>;
 };
 
-function toDateTimeLocal(value: string | null): string {
-  if (!value) {
+function convertUtcToLocalDateTime(value: string | null): string {
+  if (value === null) {
     return "";
   }
 
-  return value.slice(0, 16);
+  const date = new Date(value);
+  const localDate = new Date(date.getTime() - date.getTimezoneOffset() * MILLISECONDS_PER_MINUTE);
+  return localDate.toISOString().slice(0, 16);
+}
+
+function convertLocalDateTimeToUtc(value: string | null): string | null {
+  if (value === null || value === "") {
+    return null;
+  }
+
+  return new Date(value).toISOString();
+}
+
+function createPostInput(initialPost?: Post): PostInput {
+  if (!initialPost) {
+    return EMPTY_POST;
+  }
+
+  return {
+    title: initialPost.title,
+    slug: initialPost.slug,
+    excerpt: initialPost.excerpt,
+    body: initialPost.body,
+    status: initialPost.status,
+    published_at: convertUtcToLocalDateTime(initialPost.published_at) || null,
+  };
 }
 
 export function PostForm({ initialPost, submitLabel, onSubmit }: PostFormProps) {
-  const [input, setInput] = useState<PostInput>(
-    initialPost
-      ? { ...initialPost, published_at: toDateTimeLocal(initialPost.published_at) || null }
-      : EMPTY_POST,
-  );
+  const [input, setInput] = useState<PostInput>(() => createPostInput(initialPost));
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +73,14 @@ export function PostForm({ initialPost, submitLabel, onSubmit }: PostFormProps) 
     setIsSubmitting(true);
 
     try {
-      await onSubmit(input);
+      await onSubmit({
+        title: input.title,
+        slug: input.slug,
+        excerpt: input.excerpt,
+        body: input.body,
+        status: input.status,
+        published_at: convertLocalDateTimeToUtc(input.published_at),
+      });
     } catch (error) {
       if (error instanceof ApiRequestError) {
         if (error.status === 401) {

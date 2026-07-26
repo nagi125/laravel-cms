@@ -53,6 +53,41 @@ class AuthTest extends TestCase
             ->assertCookie('XSRF-TOKEN');
     }
 
+    public function test_login_requires_valid_csrf_token_for_stateful_requests(): void
+    {
+        $originalEnvironment = $this->app['env'];
+        $this->app['env'] = 'local';
+
+        try {
+            $user = User::factory()->create(['password' => 'password']);
+
+            $this->withHeader('Origin', 'http://localhost:3000')
+                ->postJson('/api/auth/login', [
+                    'email' => $user->email,
+                    'password' => 'password',
+                ])
+                ->assertStatus(419);
+
+            $csrfResponse = $this->get('/sanctum/csrf-cookie');
+            $sessionCookie = $csrfResponse->getCookie((string) config('session.cookie'));
+            $xsrfCookie = $csrfResponse->getCookie('XSRF-TOKEN', decrypt: false);
+
+            $this->assertNotNull($sessionCookie);
+            $this->assertNotNull($xsrfCookie);
+
+            $this->withCookie((string) config('session.cookie'), $sessionCookie->getValue());
+            $this->withUnencryptedCookies(['XSRF-TOKEN' => $xsrfCookie->getValue()]);
+            $this->withHeader('X-XSRF-TOKEN', urldecode($xsrfCookie->getValue()))
+                ->postJson('/api/auth/login', [
+                    'email' => $user->email,
+                    'password' => 'password',
+                ])
+                ->assertOk();
+        } finally {
+            $this->app['env'] = $originalEnvironment;
+        }
+    }
+
     public function test_login_preflight_allows_frontend_origin_with_credentials(): void
     {
         $this->options('/api/auth/login', [], [
