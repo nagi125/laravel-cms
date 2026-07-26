@@ -1,39 +1,17 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-
-# MacOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# IDE
-.idea
-
-# IDE Helper
-_ide_helper.php
-
-# BuildFiles
-public/css
-public/js
-resources/assets/build
-
-# docker data
-.docker-sync
-.docker/db/data/*
-.docker/redis/data/*
-
-# env
+# Environment
 .env
-.env.backup
-.env_aws
+.env.*
+!.env.example
 
-!.gitkeep
+# Laravel
+src/backend/vendor/
+src/backend/storage/*.key
+src/backend/storage/logs/
 
+# Next.js
+src/frontend/node_modules/
+src/frontend/.next/
+
+# IDE and OS
+.idea/
+.DS_Store

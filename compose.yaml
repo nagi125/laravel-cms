@@ -1,0 +1,63 @@
+services:
+  db:
+    image: postgres:18-trixie
+    environment:
+      POSTGRES_USER: cms
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: cms
+      TZ: Asia/Tokyo
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql
+      - ./docker/postgres/initdb/01-create-test-database.sql:/docker-entrypoint-initdb.d/01-create-test-database.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cms -d cms"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+    working_dir: /var/www/html
+    volumes:
+      - ./src/backend:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src/backend:/var/www/html
+    depends_on:
+      - php
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+      INTERNAL_API_URL: http://nginx
+      TZ: Asia/Tokyo
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src/frontend:/app
+      - /app/node_modules
+      - /app/.next
+    command: ./node_modules/.bin/next dev --hostname 0.0.0.0
+
+volumes:
+  db-data:

@@ -1,64 +1,61 @@
-## 概要
-制作依頼があった時のテンプレートとして使用する
- 
-## ミドルウェアのバージョン
-- PHP:8.1.x
-- Laravel:9.x
-- PostgreSQL:15.x
-- Redis:7.0.x
-- Nginx:1.22.x
-- MailCatcher
+# Laravel CMS
 
-## 開発環境構成図
-![structure](./.doc/images/structure_dev.png)
+Next.js フロントエンドと Laravel API を分離した CMS の開発ベースです。ローカル環境は Docker Compose で起動します。
 
-## 本番環境構成図
-![structure](./.doc/images/structure_prod.png)
+## 必要要件
 
-## 開発環境の準備
-### 初期セットアップ
-※ APP_KEYの値が変更されるので実行は初回だけにしてください
-```
-$ cp .env.example .env
+- Docker Desktop（Docker Compose v2 を含む）
+- GNU Make
 
-$ docker-compose build
-$ docker-compose up -d
-$ docker-compose exec app composer install
-$ docker-compose exec app npm install
-$ docker-compose exec app npm run dev
+## 初回セットアップ
 
-$ docker-compose exec app php artisan key:generate
-$ docker-compose exec app php artisan migrate:refresh --seed
+バックエンドとフロントエンドのソースが配置された後、以下を実行します。
+
+```bash
+make setup
 ```
 
-## よく使うコマンド
-### 環境立ち上げ
-```
-$ docker-compose up
+このコマンドはイメージをビルドし、PostgreSQL を起動してから Composer 依存を導入します。`src/backend/.env` がなければ `.env.example` から作成し、アプリケーションキー生成、全サービス起動、マイグレーションとシーディングまで実行します。既存の `.env` は上書きしません。
+
+## 起動・停止
+
+```bash
+make up
+make down
+make restart
+make ps
+make logs
 ```
 
-### 環境停止
-```
-$ docker-compose down
+## テスト・lint
+
+```bash
+make test
+make lint
+make fmt
 ```
 
-### 開発時のSASS・JS監視
-```
-$ docker-compose exec app npm run watch
-```
+コンテナに入るには `make shell-php` または `make shell-frontend`、PostgreSQL に接続するには `make psql` を使います。
 
-### サーバ設定変更時
-```
-$ docker-compose build
-$ dokcer-compose up
-```
+## ポート一覧
 
-### PHPライブラリの追加時
-```
-$ docker-compose exec app composer install
-```
+| ポート | 用途 |
+| --- | --- |
+| 8000 | Laravel API（Nginx） |
+| 3000 | Next.js フロントエンド |
+| 5432 | PostgreSQL |
 
-### JSライブラリの追加時
-```
-$ docker-compose exec app npm install
+## ディレクトリ構成
+
+```text
+.
+├── compose.yaml
+├── docker/
+│   ├── frontend/       # Next.js 開発用イメージ
+│   ├── nginx/          # API 配信用 Nginx 設定
+│   ├── php/            # PHP-FPM 8.5 と Composer
+│   └── postgres/       # PostgreSQL 初期化 SQL
+└── src/
+    ├── backend/        # Laravel API
+    └── frontend/       # Next.js
 ```
