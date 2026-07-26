@@ -4,11 +4,21 @@ import type { Paginated, PostSummary } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-export default async function HomePage() {
+const FIRST_PAGE = 1;
+
+type HomePageProps = {
+  searchParams: Promise<{ page?: string | string[] }>;
+};
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const query = await searchParams;
+  const pageParameter = query.page;
+  const requestedPage = typeof pageParameter === "string" ? Number(pageParameter) : FIRST_PAGE;
+  const page = Number.isInteger(requestedPage) && requestedPage >= FIRST_PAGE ? requestedPage : FIRST_PAGE;
   let posts: Paginated<PostSummary> | null = null;
 
   try {
-    posts = await getPublicPosts();
+    posts = await getPublicPosts(page);
   } catch {
     posts = null;
   }
@@ -32,6 +42,29 @@ export default async function HomePage() {
           </article>
         ))}
       </div>
+      <nav aria-label="記事一覧のページ送り" className="mt-8 flex items-center justify-between">
+        {posts.meta.current_page > FIRST_PAGE ? (
+          <Link className="text-sm text-blue-700 hover:underline" href={`/?page=${posts.meta.current_page - 1}`}>
+            前へ
+          </Link>
+        ) : (
+          <span aria-disabled="true" className="text-sm text-slate-400">
+            前へ
+          </span>
+        )}
+        <span className="text-sm text-slate-600">
+          {posts.meta.current_page} / {posts.meta.last_page}
+        </span>
+        {posts.meta.current_page < posts.meta.last_page ? (
+          <Link className="text-sm text-blue-700 hover:underline" href={`/?page=${posts.meta.current_page + 1}`}>
+            次へ
+          </Link>
+        ) : (
+          <span aria-disabled="true" className="text-sm text-slate-400">
+            次へ
+          </span>
+        )}
+      </nav>
     </section>
   );
 }

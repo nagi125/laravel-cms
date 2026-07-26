@@ -64,4 +64,21 @@ class PublicPostTest extends TestCase
             ->assertOk()
             ->assertJsonPath('meta.per_page', PostService::DEFAULT_PER_PAGE);
     }
+
+    public function test_pagination_path_uses_trusted_forwarded_origin(): void
+    {
+        $appUrl = (string) config('app.url');
+        $host = (string) parse_url($appUrl, PHP_URL_HOST);
+        $port = parse_url($appUrl, PHP_URL_PORT);
+        $forwardedHost = $host.($port === null ? '' : ':'.$port);
+
+        Post::factory()->published()->create();
+
+        $response = $this->withServerVariables([
+            'HTTP_X_FORWARDED_HOST' => $forwardedHost,
+            'HTTP_X_FORWARDED_PROTO' => parse_url($appUrl, PHP_URL_SCHEME),
+        ])->getJson('/api/posts');
+
+        $this->assertStringStartsWith($appUrl, (string) $response->json('meta.path'));
+    }
 }

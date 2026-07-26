@@ -13,6 +13,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // 本番環境では信頼するプロキシのIPを限定する。
+        $middleware->trustProxies(at: '*');
         $middleware->statefulApi();
         $middleware->throttleApi();
     })

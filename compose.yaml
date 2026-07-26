@@ -7,7 +7,7 @@ services:
       POSTGRES_DB: cms
       TZ: Asia/Tokyo
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - db-data:/var/lib/postgresql
       - ./docker/postgres/initdb/01-create-test-database.sql:/docker-entrypoint-initdb.d/01-create-test-database.sql:ro
@@ -37,7 +37,7 @@ services:
     environment:
       TZ: Asia/Tokyo
     ports:
-      - "8000:80"
+      - "127.0.0.1:8000:80"
     volumes:
       - ./src/backend:/var/www/html
     depends_on:
@@ -52,7 +52,7 @@ services:
       INTERNAL_API_URL: http://nginx
       TZ: Asia/Tokyo
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     volumes:
       - ./src/frontend:/app
       - /app/node_modules
